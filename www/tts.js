@@ -10,34 +10,24 @@
 
 */
 
-exports.speak = function (text) {
-    return new Promise(function (resolve, reject) {
-        var options = {};
-
-        if (typeof text == 'string') {
-            options.text = text;
-        } else {
-            options = text;
-        }
-
-        cordova.exec(resolve, reject, 'TTS', 'speak', [options]);
-    });
-};
-
-exports.stop = function() {
-    return new Promise(function (resolve, reject) {
-        cordova.exec(resolve, reject, 'TTS', 'stop', []);
-    });
-};
-
-exports.checkLanguage = function() {
-    return new Promise(function (resolve, reject) {
-        cordova.exec(resolve, reject, 'TTS', 'checkLanguage', []);
-    });
-};
-
-exports.openInstallTts = function() {
-    return new Promise(function (resolve, reject) {
-        cordova.exec(resolve, reject, 'TTS', 'openInstallTts', []);
-    });
+module.exports = {
+  isRecognitionAvailable: function(successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, 'SpeechRecognition', 'isRecognitionAvailable', []);
+  },
+  startListening: function(successCallback, errorCallback, options) {
+    options = options || {};
+    cordova.exec(successCallback, errorCallback, 'SpeechRecognition', 'startListening', [ options.language, options.matches, options.prompt, options.showPartial, options.showPopup ]);
+  },
+  stopListening: function(successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, 'SpeechRecognition', 'stopListening', []);
+  },
+  getSupportedLanguages: function(successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, 'SpeechRecognition', 'getSupportedLanguages', []);
+  },
+  hasPermission: function(successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, 'SpeechRecognition', 'hasPermission', []);
+  },
+  requestPermission: function(successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, 'SpeechRecognition', 'requestPermission', []);
+  }
 };
