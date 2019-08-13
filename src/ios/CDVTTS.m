@@ -61,7 +61,7 @@
     
     [synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     
-    NSDictionary* options = [command.arguments objectAtIndex:0];
+    options = [command.arguments objectAtIndex:0];
     
     text = [options objectForKey:@"text"];
     locale = [options objectForKey:@"locale"];
