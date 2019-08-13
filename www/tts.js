@@ -10,26 +10,23 @@
 
 */
 
-exports.speak = function (resolve,reject,text) {
-    var options = {};
-
-    if (typeof text == 'string') {
-        options.text = text;
-    } else {
-        options = text;
+module.exports={
+    speak : function (text,resolve,reject) {
+        var options = {};
+        if (typeof text == 'string') {
+            options.text = text;
+        } else {
+            options = text;
+        }
+        cordova.exec(resolve, reject, 'TTS', 'speak', [options]);
+    },
+    stop : function(resolve,reject) {
+        cordova.exec(resolve, reject, 'TTS', 'stop', []);
+    },
+    checkLanguage : function(resolve,reject) {
+        cordova.exec(resolve, reject, 'TTS', 'checkLanguage', []);
+    },
+    openInstallTts : function(resolve, reject) {
+        cordova.exec(resolve, reject, 'TTS', 'openInstallTts', []);
     }
-
-    cordova.exec(resolve, reject, 'TTS', 'speak', [options]);
-};
-
-exports.stop = function(resolve,reject) {
-    cordova.exec(resolve, reject, 'TTS', 'stop', []);
-};
-
-exports.checkLanguage = function(resolve,reject) {
-    cordova.exec(resolve, reject, 'TTS', 'checkLanguage', []);
-};
-
-exports.openInstallTts = function(resolve, reject) {
-    cordova.exec(resolve, reject, 'TTS', 'openInstallTts', []);
-};
+}
