@@ -52,12 +52,12 @@
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
                                          withOptions:AVAudioSessionCategoryOptionDuckOthers error:nil];
     }
-
+    
+    callbackId = command.callbackId;
+    
     if (callbackId) {
         lastCallbackId = callbackId;
     }
-    
-    callbackId = command.callbackId;
     
     [synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     
